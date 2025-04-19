@@ -1,0 +1,19 @@
+<!-- Como eu coloco o background #FAFAFA nessa div usando o tailwind? -->
+<header class="w-full py-3 px-6 bg-[#FAFAFA] flex items-center flex-col xs:flex-row">
+    <div class="flex items-center gap-2 mb-4 xs:mb-0">
+        <img class="w-5" src="images/icon-logo.svg" alt="Logotipo GoTask" />
+        <h1 class="font-bold">GoTask</h1>
+    </div>
+    <nav class="flex gap-6 xs:ml-auto" role="navigation" aria-label="Menu do usuário">
+        <button class="bg-white p-2 rounded-xl" aria-label="Ver notificações">
+            <img class="w-5" src="images/icon-notification.svg" alt="Notificações" aria-hidden="true" />
+        </button>
+        <div class="flex items-center gap-3">
+            <img class="w-7" src="images/icon-user-avatar.svg" alt="Avatar de Jennie K., usuária logada" />
+            <span class="font-bold">Jennie K.</span>
+            <button class="w-3" aria-label="Sair da conta">
+                <img class="w-3" src="images/icon-sign-out.svg" alt="Sair" aria-hidden="true" />
+            </button>
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,30 @@
+<form class="rounded-xl overflow-hidden bg-white">
+    <div class="flex gap-1 items-center p-4">
+        <img src="images/icon-new-task.svg" />
+        <h1 class="font-semibold text-lg">Criar/Editar tarefa</h1>
+        <img class="ml-auto cursor-pointer" src="images/icon-close.svg" />
+    </div>
+    <div class="p-4 border-y border-[#D1D5DB] flex flex-col gap-4">
+        <div>
+            <p class="font-semibold text-sm mb-2">Nome</p>
+            <input class="w-full border border-[#D1D5DB] p-3 rounded-lg text-sm font-light text-[#89919F]" type="text"
+                placeholder="Descreva o que deverá ser feito" />
+        </div>
+        <div>
+            <p class="font-semibold text-sm mb-2">Descrição</p>
+            <textarea class="w-full border border-[#D1D5DB] p-3 rounded-lg text-sm font-light text-[#89919F]"
+                placeholder="Adicione uma descrição"></textarea>
+        </div>
+    </div>
+    <div class="p-4 flex justify-end gap-2">
+        <button class="
+            py-3 px-4 bg-[#FAFAFA] rounded-xl 
+            text-sm font-semibold
+            cursor-pointer active:translate-y-1 transition-transform duration-75" type="button">Cancelar</button>
+        <button class="
+            bg-[#2A89EF] shadow-md shadow-blue-500/50 py-3 px-4 rounded-xl 
+            text-sm font-semibold text-white
+            cursor-pointer active:translate-y-1 transition-transform duration-75" type="submit">Criar uma
+            tarefa</button>
+    </div>
+</form>
