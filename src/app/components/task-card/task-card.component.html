@@ -1,17 +1,13 @@
 <div class="p-3 bg-[#FAFAFA] rounded-xl flex flex-col gap-3 cursor-grab">
     <div class="flex gap-1">
-        <p class="font-semibold">Implementar paginação na lista de usuários</p>
-        <img class="self-start cursor-pointer" src="images/icon-delete.svg" />
+        <p class="font-semibold">{{ task.name }}</p>
+        <img class="self-start cursor-pointer ml-auto" src="images/icon-delete.svg" />
     </div>
-    <p class="font-light text-sm">{{ `Atualmente, a lista de usuários é carregada integralmente, impactando
-        o
-        desempenho da página. O
-        objetivo é implementar a
-        paginação para otimizar a exibição e melhorar a performance.` | slice : 0 : 50 }}...</p>
+    <p class="font-light text-sm">{{ task.description| slice : 0 : 50 }}...</p>
     <div class="flex items-center gap-1">
         <img src="images/icon-comments.svg" />
         <p class="font-semibold text-xs text-[#2A89EF] underline underline-offset-2 cursor-pointer"
-            (click)="openTaskCommentsModal()">2
+            (click)="openTaskCommentsModal()">{{ task.comments.length }}
             Comentários</p>
         <p class="font-semibold text-xs text-[#2A89EF] underline underline-offset-2 cursor-pointer ml-auto"
             (click)="openEditTaskModal()">Editar</p>

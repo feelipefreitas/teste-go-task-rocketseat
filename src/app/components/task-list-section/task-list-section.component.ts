@@ -24,18 +24,18 @@ export class TaskListSectionComponent {
   readonly _taskService = inject(TaskService);
 
   ngOnInit() {
-    // this._taskService.toDoTasks.subscribe((toDoTasks) => {
-    //   console.warn('Lista atual de tarefas TOdO: ', toDoTasks);
-    //   this.toDoTasksDropList = toDoTasks;
-    // });
-    // this._taskService.doingTasks.subscribe((doingTasks) => {
-    //   console.warn('Lista atual de tarefas doing: ', doingTasks);
-    //   this.doingTasksDropList = doingTasks;
-    // });
-    // this._taskService.doneTasks.subscribe((doneTasks) => {
-    //   console.warn('Lista atual de tarefas done: ', doneTasks);
-    //   this.doneTasksDropList = doneTasks;
-    // });
+    this._taskService.toDoTasks.subscribe((toDoTasks) => {
+      console.warn('Lista atual de tarefas TOdO: ', toDoTasks);
+      this.toDoTasksDropList = toDoTasks;
+    });
+    this._taskService.doingTasks.subscribe((doingTasks) => {
+      console.warn('Lista atual de tarefas doing: ', doingTasks);
+      this.doingTasksDropList = doingTasks;
+    });
+    this._taskService.doneTasks.subscribe((doneTasks) => {
+      console.warn('Lista atual de tarefas done: ', doneTasks);
+      this.doneTasksDropList = doneTasks;
+    });
   }
 
   onCardDrop(event: CdkDragDrop<ITask[]>) {
