@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { TaskCardComponent } from '../task-card/task-card.component';
-import { ITask, TaskService } from '../../services/task.service';
+import { ITask, TaskService, TaskStatus, TaskStatusEnum } from '../../services/task.service';
 import { AsyncPipe } from '@angular/common';
 import {
   CdkDragDrop,
@@ -23,7 +23,20 @@ export class TaskListSectionComponent {
 
   readonly _taskService = inject(TaskService);
 
-  ngOnInit() { }
+  ngOnInit() {
+    // this._taskService.toDoTasks.subscribe((toDoTasks) => {
+    //   console.warn('Lista atual de tarefas TOdO: ', toDoTasks);
+    //   this.toDoTasksDropList = toDoTasks;
+    // });
+    // this._taskService.doingTasks.subscribe((doingTasks) => {
+    //   console.warn('Lista atual de tarefas doing: ', doingTasks);
+    //   this.doingTasksDropList = doingTasks;
+    // });
+    // this._taskService.doneTasks.subscribe((doneTasks) => {
+    //   console.warn('Lista atual de tarefas done: ', doneTasks);
+    //   this.doneTasksDropList = doneTasks;
+    // });
+  }
 
   onCardDrop(event: CdkDragDrop<ITask[]>) {
     this.moveCardToColumn(event);
@@ -33,21 +46,20 @@ export class TaskListSectionComponent {
     const droppedColumn = event.container.id;
 
     this.updateTaskStatus(taskId, taskCurrentStatus, droppedColumn);
-    console.log(event)
   }
 
-  private updateTaskStatus(taskId: string, taskCurrentStatus: string, droppedColumn: string) {
-    let taskNextStatus = '';
+  private updateTaskStatus(taskId: string, taskCurrentStatus: TaskStatus, droppedColumn: string) {
+    let taskNextStatus: TaskStatus;
 
     switch (droppedColumn) {
       case 'to-do-column':
-        taskNextStatus = 'to-do';
+        taskNextStatus = TaskStatusEnum.TODO;
         break;
       case 'doing-column':
-        taskNextStatus = 'doing';
+        taskNextStatus = TaskStatusEnum.DOING;
         break;
       case 'done-column':
-        taskNextStatus = 'done';
+        taskNextStatus = TaskStatusEnum.DONE;
         break;
       default:
         throw Error('Coluna não localizada.');
@@ -70,15 +82,3 @@ export class TaskListSectionComponent {
   }
 }
 
-// this._taskService.toDoTasks.subscribe((toDoTasks) => {
-//   console.log('Lista atual de tarefas TOdO: ', toDoTasks);
-//   this.toDoTasksDropList = toDoTasks;
-// });
-// this._taskService.doingTasks.subscribe((doingTasks) => {
-//   console.log('Lista atual de tarefas doing: ', doingTasks);
-//   this.doingTasksDropList = doingTasks;
-// });
-// this._taskService.doneTasks.subscribe((doneTasks) => {
-//   console.log('Lista atual de tarefas done: ', doneTasks);
-//   this.doneTasksDropList = doneTasks;
-// });

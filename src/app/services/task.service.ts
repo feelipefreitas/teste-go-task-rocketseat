@@ -2,12 +2,20 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { ITaskFormControls } from '../components/task-form-modal/task-form-modal.component';
 
+export enum TaskStatusEnum {
+  TODO = 'to-do',
+  DOING = 'doing',
+  DONE = 'done',
+};
+
+export type TaskStatus = TaskStatusEnum.TODO | TaskStatusEnum.DOING | TaskStatusEnum.DONE;
+
 export interface ITask {
   id: string;
   name: string;
   description: string;
   comments: ITaskComment[];
-  status: 'to-do' | 'doing' | 'done';
+  status: TaskStatus;
 }
 
 export interface ITaskComment {
@@ -41,7 +49,7 @@ export class TaskService {
   addTask(taskInfos: ITaskFormControls) {
     const newTask: ITask = {
       ...taskInfos,
-      status: 'to-do',
+      status: TaskStatusEnum.TODO,
       id: this.generateUniqueIdWithTimestamp(),
       comments: [],
     };
@@ -51,8 +59,37 @@ export class TaskService {
     this.toDoTasks$.next([...currentList, newTask]);
   }
 
-  updateTaskStatus(taskId: string, taskCurrentStatus: string, taskNextStatus: string) {
+  updateTaskStatus(taskId: string, taskCurrentStatus: TaskStatus, taskNextStatus: TaskStatus) {
     console.log('Atualizando status da tarefa: ', taskId, taskCurrentStatus, taskNextStatus);
+
+    // Não recebo toda a tarefa do componente por parâmetro pois pode ser que o objeto tenha sofrido alguma alteração
+
+    const currentTaskList = this.getTaskListByStatus(taskCurrentStatus);
+    const nextTaskList = this.getTaskListByStatus(taskNextStatus);
+    const currentTask = currentTaskList.value.find(task => task.id === taskId);
+
+    if (currentTask) {
+      // Atualizando status da tarefa
+      currentTask.status = taskNextStatus;
+
+      // Removendo tarefa da lista atual
+      const currentTaskListWithoutTask = currentTaskList.value.filter(task => task.id !== taskId);
+      currentTaskList.next([...currentTaskListWithoutTask]);
+
+      // Adicionando tarefa na nova lista
+      nextTaskList.next([...nextTaskList.value, { ...currentTask }]);
+    }
+
+  }
+
+  private getTaskListByStatus(taskStatus: TaskStatus) {
+    const taskListObj = {
+      [TaskStatusEnum.TODO]: this.toDoTasks$,
+      [TaskStatusEnum.DOING]: this.doingTasks$,
+      [TaskStatusEnum.DONE]: this.doneTasks$,
+    };
+
+    return taskListObj[taskStatus];
   }
 
   private generateUniqueIdWithTimestamp(): string {
