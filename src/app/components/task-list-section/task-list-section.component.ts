@@ -23,22 +23,40 @@ export class TaskListSectionComponent {
 
   readonly _taskService = inject(TaskService);
 
-  ngOnInit() {
-    this._taskService.toDoTasks.subscribe((toDoTasks) => {
-      console.log('Lista atual de tarefas TOdO: ', toDoTasks);
-      this.toDoTasksDropList = toDoTasks;
-    });
-    this._taskService.doingTasks.subscribe((doingTasks) => {
-      console.log('Lista atual de tarefas doing: ', doingTasks);
-      this.doingTasksDropList = doingTasks;
-    });
-    this._taskService.doneTasks.subscribe((doneTasks) => {
-      console.log('Lista atual de tarefas done: ', doneTasks);
-      this.doneTasksDropList = doneTasks;
-    });
+  ngOnInit() { }
+
+  onCardDrop(event: CdkDragDrop<ITask[]>) {
+    this.moveCardToColumn(event);
+
+    const taskId = event.item.data.id;
+    const taskCurrentStatus = event.item.data.status;
+    const droppedColumn = event.container.id;
+
+    this.updateTaskStatus(taskId, taskCurrentStatus, droppedColumn);
+    console.log(event)
   }
 
-  drop(event: CdkDragDrop<ITask[]>) {
+  private updateTaskStatus(taskId: string, taskCurrentStatus: string, droppedColumn: string) {
+    let taskNextStatus = '';
+
+    switch (droppedColumn) {
+      case 'to-do-column':
+        taskNextStatus = 'to-do';
+        break;
+      case 'doing-column':
+        taskNextStatus = 'doing';
+        break;
+      case 'done-column':
+        taskNextStatus = 'done';
+        break;
+      default:
+        throw Error('Coluna não localizada.');
+    }
+
+    this._taskService.updateTaskStatus(taskId, taskCurrentStatus, taskNextStatus);
+  }
+
+  private moveCardToColumn(event: CdkDragDrop<ITask[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -51,3 +69,16 @@ export class TaskListSectionComponent {
     }
   }
 }
+
+// this._taskService.toDoTasks.subscribe((toDoTasks) => {
+//   console.log('Lista atual de tarefas TOdO: ', toDoTasks);
+//   this.toDoTasksDropList = toDoTasks;
+// });
+// this._taskService.doingTasks.subscribe((doingTasks) => {
+//   console.log('Lista atual de tarefas doing: ', doingTasks);
+//   this.doingTasksDropList = doingTasks;
+// });
+// this._taskService.doneTasks.subscribe((doneTasks) => {
+//   console.log('Lista atual de tarefas done: ', doneTasks);
+//   this.doneTasksDropList = doneTasks;
+// });
