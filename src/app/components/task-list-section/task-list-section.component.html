@@ -1,8 +1,10 @@
-<div class="p-3 flex overflow-x-auto scrollbar-hidden mb-6">
-    @let todoTasks = (this._taskService.toDoTasks | async) ?? [];
-    @let doingTasks = (this._taskService.doingTasks | async) ?? [];
-    @let doneTasks = (this._taskService.doneTasks | async) ?? [];
+@let todoTasks = (this._taskService.toDoTasks | async) ?? [];
+@let doingTasks = (this._taskService.doingTasks | async) ?? [];
+@let doneTasks = (this._taskService.doneTasks | async) ?? [];
 
+@let noTasksCreated = todoTasks.length === 0 && doingTasks.length === 0 && doneTasks.length === 0;
+
+<div class="p-3 flex overflow-x-auto scrollbar-hidden mb-6">
     <!-- Coluna A Fazer -->
     <div class="py-3 px-6 min-w-60 flex-1 flex flex-col gap-6" id="to-do-column" cdkDropList
         #toDoTasksCdkDropList="cdkDropList" [cdkDropListData]="todoTasks"
@@ -56,6 +58,8 @@
     </div>
 </div>
 
+@if(noTasksCreated) {
 <div class="bg-[#FAFAFA] rounded-sm py-3 px-5 border-l-4 border-black">
     <p class="font-semibold text-lg text-[#9CA3AF]">Nenhuma tarefa disponível no momento.</p>
 </div>
+}
