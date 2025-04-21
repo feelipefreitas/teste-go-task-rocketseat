@@ -11,6 +11,12 @@ export class WelcomeSectionComponent {
   private readonly _modalControllerService = inject(ModalControllerService);
 
   openNewTaskModal() {
-    this._modalControllerService.openNewTaskModal();
+    const dialogRef = this._modalControllerService.openNewTaskModal();
+
+    dialogRef.closed.subscribe((formValues) => {
+      if (formValues) {
+        console.log('Criando tarefa: ', formValues);
+      }
+    });
   }
 }

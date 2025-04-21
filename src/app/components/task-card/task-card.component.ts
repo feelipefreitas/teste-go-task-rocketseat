@@ -16,6 +16,12 @@ export class TaskCardComponent {
   }
 
   openEditTaskModal() {
-    this._modalControllerService.openEditTaskModal({ name: 'Nome Edição', description: 'Descrição Edição' });
+    const dialogRef = this._modalControllerService.openEditTaskModal({ name: 'Nome Edição', description: 'Descrição Edição' });
+
+    dialogRef.closed.subscribe((taskForm) => {
+      if (taskForm) {
+        console.log('Editando tarefa: ', taskForm);
+      }
+    });
   }
 }

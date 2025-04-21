@@ -1,5 +1,5 @@
 import { Component, inject, Inject } from '@angular/core';
-import { DIALOG_DATA } from '@angular/cdk/dialog';
+import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@Angular/forms';
 
 export interface ITaskFormModalData {
@@ -19,6 +19,7 @@ export interface ITaskFormControls {
   styleUrl: './task-form-modal.component.css'
 })
 export class TaskFormModalComponent {
+  readonly _dialogRef: DialogRef<ITaskFormControls> = inject(DialogRef);
   readonly data: ITaskFormModalData = inject(DIALOG_DATA);
 
   taskForm: FormGroup = new FormGroup({
@@ -29,5 +30,11 @@ export class TaskFormModalComponent {
   onFormSubmit() {
     console.log('Formulário: ', this.taskForm);
     console.log('Formulário enviado: ', this.taskForm.value);
+
+    this.closeModal(this.taskForm.value);
+  }
+
+  closeModal(formValues: ITaskFormControls | undefined = undefined) {
+    this._dialogRef.close(formValues);
   }
 }
