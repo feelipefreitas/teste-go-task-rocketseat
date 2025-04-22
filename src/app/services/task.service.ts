@@ -100,6 +100,22 @@ export class TaskService {
     }
   }
 
+  updateTaskComments(taskId: string, taskCurrentStatus: TaskStatus, newTaskComments: ITaskComment[]) {
+    const currentTaskList = this.getTaskListByStatus(taskCurrentStatus);
+    const currentTaskIndex = currentTaskList.value.findIndex(task => task.id === taskId);
+
+    if (currentTaskIndex > -1) {
+      const updatedTaskList = [...currentTaskList.value];
+
+      updatedTaskList[currentTaskIndex] = {
+        ...updatedTaskList[currentTaskIndex],
+        comments: [...newTaskComments],
+      };
+
+      currentTaskList.next(updatedTaskList);
+    }
+  }
+
   private getTaskListByStatus(taskStatus: TaskStatus) {
     const taskListObj = {
       [TaskStatusEnum.TODO]: this.toDoTasks$,

@@ -16,29 +16,12 @@ export class TaskCardComponent {
   private readonly _taskService = inject(TaskService);
 
   openTaskCommentsModal() {
-    // const taskMock = this.task;
-    // taskMock.comments = [
-    //   {
-    //     id: '1',
-    //     description: 'Percebi que, ao recarregar a página, a navegação.',
-    //     dayOfComment: '10'
-    //   },
-    //   {
-    //     id: '2',
-    //     description: 'Percebi que, ao recarregar a página, a navegação.',
-    //     dayOfComment: '10'
-    //   },
-    //   {
-    //     id: '3',
-    //     description: 'Percebi que, ao recarregar a página, a navegação.',
-    //     dayOfComment: '10'
-    //   },
-    // ];
     const dialogRef = this._modalControllerService.openTaskCommentsModal(this.task);
 
     dialogRef.closed.subscribe((taskCommentsChanged) => {
       if (taskCommentsChanged) {
         console.log('Alterações nos comentários atualizadas: ', taskCommentsChanged);
+        this._taskService.updateTaskComments(this.task.id, this.task.status, this.task.comments);
       }
     });
   }
