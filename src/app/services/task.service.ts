@@ -1,28 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
-import { ITaskFormControls } from '../components/task-form-modal/task-form-modal.component';
 import { generateUniqueIdWithTimestamp } from '../utils/generate-unique-id-with-timestamp';
-
-export enum TaskStatusEnum {
-  TODO = 'to-do',
-  DOING = 'doing',
-  DONE = 'done',
-};
-
-export type TaskStatus = TaskStatusEnum.TODO | TaskStatusEnum.DOING | TaskStatusEnum.DONE;
-
-export interface ITask {
-  id: string;
-  name: string;
-  description: string;
-  comments: ITaskComment[];
-  status: TaskStatus;
-}
-
-export interface ITaskComment {
-  id: string;
-  description: string;
-}
+import { TaskStatusEnum } from '../enums/task-status.enum';
+import { ITask } from '../interfaces/task.interface';
+import { TaskStatus } from '../types/task-status';
+import { ITaskComment } from '../interfaces/task-comment.interface';
+import { ITaskFormControls } from '../interfaces/task-form-controls.interface';
 
 @Injectable({
   providedIn: 'root'

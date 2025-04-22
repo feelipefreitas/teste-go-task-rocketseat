@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { TaskCardComponent } from '../task-card/task-card.component';
-import { ITask, TaskService, TaskStatus, TaskStatusEnum } from '../../services/task.service';
 import { AsyncPipe } from '@angular/common';
 import {
   CdkDragDrop,
@@ -9,6 +8,10 @@ import {
   CdkDrag,
   CdkDropList,
 } from '@angular/cdk/drag-drop';
+import { ITask } from '../../interfaces/task.interface';
+import { TaskService } from '../../services/task.service';
+import { TaskStatus } from '../../types/task-status';
+import { TaskStatusEnum } from '../../enums/task-status.enum';
 
 @Component({
   selector: 'app-task-list-section',
@@ -22,21 +25,6 @@ export class TaskListSectionComponent {
   doneTasksDropList: ITask[] = [];
 
   readonly _taskService = inject(TaskService);
-
-  ngOnInit() {
-    this._taskService.toDoTasks.subscribe((toDoTasks) => {
-      console.warn('Lista atual de tarefas TOdO: ', toDoTasks);
-      this.toDoTasksDropList = toDoTasks;
-    });
-    this._taskService.doingTasks.subscribe((doingTasks) => {
-      console.warn('Lista atual de tarefas doing: ', doingTasks);
-      this.doingTasksDropList = doingTasks;
-    });
-    this._taskService.doneTasks.subscribe((doneTasks) => {
-      console.warn('Lista atual de tarefas done: ', doneTasks);
-      this.doneTasksDropList = doneTasks;
-    });
-  }
 
   onCardDrop(event: CdkDragDrop<ITask[]>) {
     this.moveCardToColumn(event);

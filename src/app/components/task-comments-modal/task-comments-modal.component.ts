@@ -1,8 +1,9 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
-import { ITask, ITaskComment } from '../../services/task.service';
 import { ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { generateUniqueIdWithTimestamp } from '../../utils/generate-unique-id-with-timestamp';
+import { ITask } from '../../interfaces/task.interface';
+import { ITaskComment } from '../../interfaces/task-comment.interface';
 
 @Component({
   selector: 'app-task-comments-modal',
