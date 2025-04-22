@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { ITaskFormControls } from '../components/task-form-modal/task-form-modal.component';
+import { generateUniqueIdWithTimestamp } from '../utils/generate-unique-id-with-timestamp';
 
 export enum TaskStatusEnum {
   TODO = 'to-do',
@@ -50,7 +51,7 @@ export class TaskService {
     const newTask: ITask = {
       ...taskInfos,
       status: TaskStatusEnum.TODO,
-      id: this.generateUniqueIdWithTimestamp(),
+      id: generateUniqueIdWithTimestamp(),
       comments: [],
     };
 
@@ -107,11 +108,5 @@ export class TaskService {
     };
 
     return taskListObj[taskStatus];
-  }
-
-  private generateUniqueIdWithTimestamp(): string {
-    const timestamp = new Date().getTime().toString(36); // Convert current timestamp to base 36
-    const randomPart = Math.random().toString(36).substring(2, 9); // Shorter random part
-    return `${timestamp}-${randomPart}`;
   }
 }

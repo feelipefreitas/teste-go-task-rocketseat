@@ -1,6 +1,6 @@
 import { Component, inject, Inject } from '@angular/core';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@Angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 export interface ITaskFormModalData {
   mode: 'create' | 'edit';
