@@ -18,7 +18,7 @@ export class TaskCommentsModalComponent {
   @ViewChild('commentInput') commentInputRef!: ElementRef<HTMLInputElement>;
 
   readonly _dialogRef: DialogRef<boolean> = inject(DialogRef);
-  readonly task: ITask = inject(DIALOG_DATA);
+  readonly _task: ITask = inject(DIALOG_DATA);
 
   onAddComment() {
     const newComment: ITaskComment = {
@@ -26,7 +26,7 @@ export class TaskCommentsModalComponent {
       description: this.commentControl.value ? this.commentControl.value : '',
     };
 
-    this.task.comments.unshift(newComment);
+    this._task.comments.unshift(newComment);
 
     this.commentControl.reset();
 
@@ -36,7 +36,7 @@ export class TaskCommentsModalComponent {
   }
 
   onRemoveComment(commentId: string) {
-    this.task.comments = this.task.comments.filter(comment => comment.id !== commentId);
+    this._task.comments = this._task.comments.filter(comment => comment.id !== commentId);
 
     this.taskCommentsChanged = true;
   }

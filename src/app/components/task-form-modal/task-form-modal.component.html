@@ -1,7 +1,7 @@
 <form class="rounded-xl overflow-hidden bg-white" [formGroup]="taskForm" (ngSubmit)="onFormSubmit()">
     <div class="flex gap-1 items-center p-4">
         <img src="images/icon-new-task.svg" />
-        <h1 class="font-semibold text-lg">{{ (data.mode === 'create' ? 'Criar' : 'Editar') + ' tarefa' }}</h1>
+        <h1 class="font-semibold text-lg">{{ (_data.mode === 'create' ? 'Criar' : 'Editar') + ' tarefa' }}</h1>
         <img class="ml-auto cursor-pointer" src="images/icon-close.svg" (click)="closeModal()" />
     </div>
     <div class="p-4 border-y border-[#D1D5DB] flex flex-col gap-4">
@@ -36,7 +36,7 @@
                 ? 'bg-[#D7D8D8]' 
                 : 'bg-[#2A89EF] shadow-md shadow-blue-500/50 active:translate-y-1 transition-transform duration-75' }
         `}}" type="submit" [disabled]="taskForm.invalid">
-            {{ data.mode === 'create' ? 'Criar uma tarefa' : 'Salvar alterações' }}
+            {{ _data.mode === 'create' ? 'Criar uma tarefa' : 'Salvar alterações' }}
         </button>
     </div>
 </form>

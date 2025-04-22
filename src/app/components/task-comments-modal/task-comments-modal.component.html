@@ -5,9 +5,9 @@
         <img class="ml-auto cursor-pointer" src="images/icon-close.svg" (click)="onCloseModal()" />
     </div>
     <div class="p-4 border-t border-[#D1D5DB]">
-        <h1 class="font-semibold text-lg mb-4">{{ task.name }}</h1>
+        <h1 class="font-semibold text-lg mb-4">{{ _task.name }}</h1>
         <p class="font-semibold text-sm mb-2">Descrição</p>
-        <p class="font-normal text-base text-[#374151]">{{ task.description }}</p>
+        <p class="font-normal text-base text-[#374151]">{{ _task.description }}</p>
     </div>
     <div class="p-4">
         <div class="bg-[#F3F4F6] p-5 rounded-lg flex flex-col gap-5">
@@ -30,7 +30,7 @@
                 `}}" [disabled]="commentControl.invalid" (click)="onAddComment()">Adicionar</button>
             </div>
             <div class="flex flex-col gap-5 overflow-scroll max-h-44 scrollbar-hidden">
-                @for(comment of task.comments; track comment.id; let last = $last) {
+                @for(comment of _task.comments; track comment.id; let last = $last) {
                 <div class="{{ `flex flex-col gap-3 ${ !last ? 'border-b border-[#D1D5DB]' : '' }` }}">
                     <div>
                         <p class="font-light text-sm text-[#374151]">{{ comment.description }}</p>

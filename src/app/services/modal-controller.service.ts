@@ -9,11 +9,12 @@ import { ITaskFormControls } from '../interfaces/task-form-controls.interface';
   providedIn: 'root'
 })
 export class ModalControllerService {
-  private readonly _dialog = inject(Dialog);
   private readonly modalSizeOptions = {
     width: '95%',
     maxWidth: '620px',
   };
+
+  private readonly _dialog = inject(Dialog);
 
   openNewTaskModal() {
     return this._dialog.open<ITaskFormControls>(TaskFormModalComponent, {

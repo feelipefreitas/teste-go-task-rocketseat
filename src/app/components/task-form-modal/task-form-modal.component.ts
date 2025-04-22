@@ -12,11 +12,11 @@ import { ITaskFormModalData } from '../../interfaces/task-form-modal-data.interf
 })
 export class TaskFormModalComponent {
   readonly _dialogRef: DialogRef<ITaskFormControls> = inject(DialogRef);
-  readonly data: ITaskFormModalData = inject(DIALOG_DATA);
+  readonly _data: ITaskFormModalData = inject(DIALOG_DATA);
 
   taskForm: FormGroup = new FormGroup({
-    name: new FormControl(this.data.formValues.name, [Validators.required, Validators.minLength(10)]),
-    description: new FormControl(this.data.formValues.description, [Validators.required, Validators.minLength(10)]),
+    name: new FormControl(this._data.formValues.name, [Validators.required, Validators.minLength(10)]),
+    description: new FormControl(this._data.formValues.description, [Validators.required, Validators.minLength(10)]),
   });
 
   onFormSubmit() {
