@@ -20,12 +20,9 @@ export class TaskCommentsModalComponent {
   readonly task: ITask = inject(DIALOG_DATA);
 
   onAddComment() {
-    console.log('Novo comentário: ', this.commentControl.value);
-
     const newComment: ITaskComment = {
       id: generateUniqueIdWithTimestamp(),
       description: this.commentControl.value ? this.commentControl.value : '',
-      dayOfComment: '10',
     };
 
     this.task.comments.unshift(newComment);

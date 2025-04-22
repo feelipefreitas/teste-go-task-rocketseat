@@ -23,11 +23,11 @@
                     <p class="font-semibold text-sm text-red-500">O campo é obrigatório.</p>
                     }
                 </div>
-                <button class="
-                            bg-[#2A89EF] shadow-md shadow-blue-500/50 py-3 px-4 rounded-xl 
-                            text-sm font-semibold text-white
-                            cursor-pointer active:translate-y-1 transition-transform duration-75"
-                    [disabled]="commentControl.invalid" (click)="onAddComment()">Adicionar</button>
+                <button class="{{ `py-3 px-4 rounded-xl text-sm font-semibold text-white cursor-pointer
+                    ${ commentControl.invalid 
+                        ? 'bg-[#D7D8D8]' 
+                        : 'bg-[#2A89EF] shadow-md shadow-blue-500/50 active:translate-y-1 transition-transform duration-75' }
+                `}}" [disabled]="commentControl.invalid" (click)="onAddComment()">Adicionar</button>
             </div>
             <div class="flex flex-col gap-5 overflow-scroll max-h-44 scrollbar-hidden">
                 @for(comment of task.comments; track comment.id; let last = $last) {
@@ -36,8 +36,7 @@
                         <p class="font-light text-sm text-[#374151]">{{ comment.description }}</p>
                     </div>
                     <div class="{{`flex gap-4 ${ !last ? 'mb-3' : '' }`}}">
-                        <p class="font-normal text-xs text-[#9CA3AF]">{{ `Comentado há ${ comment.dayOfComment } min
-                            atrás` }}</p>
+                        <p class="font-normal text-xs text-[#9CA3AF]">Comentado há 1 min atrás</p>
                         <p class="font-semibold text-xs underline underline-offset-2 cursor-pointer"
                             (click)="onRemoveComment(comment.id)">Apagar</p>
                     </div>

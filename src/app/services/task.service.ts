@@ -22,7 +22,6 @@ export interface ITask {
 export interface ITaskComment {
   id: string;
   description: string;
-  dayOfComment: string; //TODO: qual é a melhor forma de salver essa data
 }
 
 @Injectable({
@@ -61,8 +60,6 @@ export class TaskService {
   }
 
   updateTaskStatus(taskId: string, taskCurrentStatus: TaskStatus, taskNextStatus: TaskStatus) {
-    console.log('Atualizando status da tarefa: ', taskId, taskCurrentStatus, taskNextStatus);
-
     // Não recebo toda a tarefa do componente por parâmetro pois pode ser que o objeto tenha sofrido alguma alteração
 
     const currentTaskList = this.getTaskListByStatus(taskCurrentStatus);

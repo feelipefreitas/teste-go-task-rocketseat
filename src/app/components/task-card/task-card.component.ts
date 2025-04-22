@@ -20,7 +20,6 @@ export class TaskCardComponent {
 
     dialogRef.closed.subscribe((taskCommentsChanged) => {
       if (taskCommentsChanged) {
-        console.log('Alterações nos comentários atualizadas: ', taskCommentsChanged);
         this._taskService.updateTaskComments(this.task.id, this.task.status, this.task.comments);
       }
     });
@@ -31,8 +30,6 @@ export class TaskCardComponent {
 
     dialogRef.closed.subscribe((taskForm) => {
       if (taskForm) {
-        console.log('Editando tarefa: ', taskForm);
-
         this._taskService.updateTaskNameAndDescription(
           this.task.id,
           this.task.status,

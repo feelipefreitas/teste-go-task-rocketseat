@@ -17,7 +17,6 @@ export class WelcomeSectionComponent {
 
     dialogRef.closed.subscribe((formValues) => {
       if (formValues) {
-        console.log('Criando tarefa: ', formValues);
         this._taskService.addTask(formValues);
       }
     });

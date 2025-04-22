@@ -28,9 +28,6 @@ export class TaskFormModalComponent {
   });
 
   onFormSubmit() {
-    console.log('Formulário: ', this.taskForm);
-    console.log('Formulário enviado: ', this.taskForm.value);
-
     this.closeModal(this.taskForm.value);
   }
 
