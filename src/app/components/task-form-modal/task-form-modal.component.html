@@ -9,7 +9,7 @@
             <p class="font-semibold text-sm mb-2">Nome</p>
             <input class="w-full border border-[#D1D5DB] p-3 rounded-lg text-sm font-light text-[#89919F]" type="text"
                 placeholder="Descreva o que deverá ser feito" formControlName="name" />
-            @if (taskForm.get('name')?.touched && taskForm.get('name')?.invalid) {
+            @if (taskForm.get('name')?.dirty && taskForm.get('name')?.invalid) {
             <p class="font-semibold text-sm text-red-500">O campo é obrigatório e precisa ter no mínimo 10
                 caracteres.</p>
             }
@@ -18,7 +18,7 @@
             <p class="font-semibold text-sm mb-2">Descrição</p>
             <textarea class="w-full border border-[#D1D5DB] p-3 rounded-lg text-sm font-light text-[#89919F]"
                 placeholder="Adicione uma descrição" formControlName="description"></textarea>
-            @if(taskForm.get('description')?.touched && taskForm.get('description')?.invalid) {
+            @if(taskForm.get('description')?.dirty && taskForm.get('description')?.invalid) {
             <p class="font-semibold text-sm text-red-500">O campo é obrigatório e precisa ter no mínimo 10
                 caracteres.</p>
             }
